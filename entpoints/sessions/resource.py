@@ -1,16 +1,19 @@
 from flask import jsonify
-from flask_restful import Resource,reqparse
+from flask_restful import Resource, reqparse
 
 session_parser = reqparse.RequestParser()
 
-session_parser.add_argument('token',type=str,location = ['cookies'])
-session_parser.add_argument('phone',type=str,location = ['json'])
-session_parser.add_argument('pwd',type=str,location = ['json'])
+session_parser.add_argument('token', type=str, location=['cookies'])
+session_parser.add_argument('phone', type=str, location=['json'])
+session_parser.add_argument('pwd', type=str, location=['json'])
 
 
 user_dic = {}
+
+
 class SessionsResource(Resource):
-    #登录
+    # 登录
+
     def post(self):
         """
             小程序用户登录
@@ -50,8 +53,8 @@ class SessionsResource(Resource):
         print(args)
         phone = args.phone
         pwd = args.pwd
-        print(phone,pwd)
-        user_dic.update({'phone':phone,'pwd':pwd})
+        print(phone, pwd)
+        user_dic.update({'phone': phone, 'pwd': pwd})
         # user_dic['pwd'] = pwd
         return user_dic
 
@@ -93,7 +96,7 @@ class SessionsResource(Resource):
         return jsonify(user_dic)
 
     # 删除
-    def delete(self,phone):
+    def delete(self):
         """
             退出
             ---
